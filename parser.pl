@@ -22,7 +22,7 @@
 %%! LEXICON %%
 
 %%! Determiners %%
-%% d0(d0(determiner), [[case], [gender, person, number],[?proper] ,[subcategorization]])
+%% d0(d0(determiner), [[case], [gender, person, number],[class] ,[subcategorization]])
 
 %%! Articles
 d0(d0(un), [[nom, acc, obl],[m, 3, s],[comm], [np]])   --> [un].
@@ -74,7 +74,7 @@ d0(d0(ellas), [[_], [f,3,p],[proper], []])      --> [ellas].
 
 
 %%! Nouns
-%% n0(n0(noun), [[case], [gender, person, number],[?proper] ,[subcategorization]])
+%% n0(n0(noun), [[case], [gender, person, number],[class] ,[subcategorization]])
 n0(n0(linguista),[_,[_,3,s], [comm], [dp]])      --> [linguista].
 n0(n0(linguistas),[_,[_,3,p], [comm], [dp]])     --> [linguistas].
 n0(n0(observatorio),[_,[m,3,s], [comm], [dp]])   --> [observatorio].
@@ -158,15 +158,15 @@ ap(ap(Int, A), [_, Phi]) --> int0(Int,_), abar(A, [_,Phi]).
 
 
 %%! Nouns
-% nbar(nbar(N), [Case,Phi, F]) 
+% nbar(nbar(N), [Case,Phi, Class]) 
 % np(np(N), [Case,Phi, F])
-nbar(nbar(N), [Case,Phi, Prop])     --> n0(N, [Case,Phi, Prop, [dp]]).
-nbar(nbar(N, D), [Case,Phi, Prop])     --> n0(N, [Case,Phi, Prop, [dp]]), dp(D, [[gen], _]).
+nbar(nbar(N), [Case,Phi, Class])     --> n0(N, [Case,Phi, Class, [dp]]).
+nbar(nbar(N, D), [Case,Phi, Class])     --> n0(N, [Case,Phi, Class, [dp]]), dp(D, [[gen], _]).
 
-np(np(N), [Case,Phi, Prop])    --> nbar(N, [Case, Phi, Prop]). 
-np(np(N, A), [Case,Phi, Prop]) --> np(N, [Case, Phi, Prop]), ap(A, [Case,Phi]).
-np(np(A, N), [Case,Phi, Prop]) --> ap(A, [Case, Phi]), np(N, [Case,Phi, Prop]).
-np(np(N, P), [Case,Phi, Prop]) --> np(N, [Case, Phi, Prop]), pp(P,_).
+np(np(N), [Case,Phi, Class])    --> nbar(N, [Case, Phi, Class]). 
+np(np(N, A), [Case,Phi, Class]) --> np(N, [Case, Phi, Class]), ap(A, [Case,Phi]).
+np(np(A, N), [Case,Phi, Class]) --> ap(A, [Case, Phi]), np(N, [Case,Phi, Class]).
+np(np(N, P), [Case,Phi, Class]) --> np(N, [Case, Phi, Class]), pp(P,_).
 
 
 %%! Prepositions 
@@ -204,7 +204,7 @@ dbar(dbar(D), [Case, Phi])     --> d0(D, [Case, Phi,[],[]]).
 %%!  personal pronouns
 dbar(dbar(D), [Case, Phi])     --> d0(D, [Case, Phi,[proper],[]]).
 %%! determiner + np(articles)
-dbar(dbar(D, N),[Case2, Phi]) --> d0(D, [Case2, Phi, Prop,[np]]), np(N, [Case, Phi, Prop]), { subset(Case2, Case) }.
+dbar(dbar(D, N),[Case2, Phi]) --> d0(D, [Case2, Phi, Class,[np]]), np(N, [Case, Phi, Class]), { subset(Case2, Case) }.
 dp(dp(D), [Case, Phi]) --> dbar(D, [Case, Phi]).
 
 
