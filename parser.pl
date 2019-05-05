@@ -22,70 +22,70 @@
 %%! LEXICON %%
 
 %%! Determiners %%
-%% d0(d0(determiner), [[case], [gender, person, number], [subcategorization]])
+%% d0(d0(determiner), [[case], [gender, person, number],[?proper] ,[subcategorization]])
 
 %%! Articles
-d0(d0(un), [[nom, acc, obl],[m, 3, s], [np]])   --> [un].
-d0(d0(una), [[nom, acc, obl],[f, 3, s], [np]])  --> [una].
-d0(d0(unos), [[nom, acc, obl],[m, 3, p], [np]]) --> [unos].
-d0(d0(unas), [[nom, acc, obl],[f, 3, p], [np]]) --> [unas].
-d0(d0(el), [[nom, acc, obl],[m, 3, s], [np]])   --> [el].
-d0(d0(la), [[nom, acc, obl],[f, 3, s], [np]])   --> [la].
-d0(d0(los), [[nom, acc, obl],[m, 3, p], [np]])  --> [los].
-d0(d0(las), [[nom, acc, obl],[f, 3, p], [np]])  --> [las].
+d0(d0(un), [[nom, acc, obl],[m, 3, s],[comm], [np]])   --> [un].
+d0(d0(una), [[nom, acc, obl],[f, 3, s],[comm], [np]])  --> [una].
+d0(d0(unos), [[nom, acc, obl],[m, 3, p],[comm], [np]]) --> [unos].
+d0(d0(unas), [[nom, acc, obl],[f, 3, p],[comm], [np]]) --> [unas].
+d0(d0(el), [[nom, acc, obl],[m, 3, s],[comm], [np]])   --> [el].
+d0(d0(la), [[nom, acc, obl],[f, 3, s],[comm], [np]])   --> [la].
+d0(d0(los), [[nom, acc, obl],[m, 3, p],[comm], [np]])  --> [los].
+d0(d0(las), [[nom, acc, obl],[f, 3, p],[comm], [np]])  --> [las].
 
 %%! articles in accusative
-d0(d0(a, un), [[acc],[m, 3, s], [np]])   --> [a, un].
-d0(d0(a, una), [[acc],[f, 3, s], [np]])  --> [a, una].
-d0(d0(a, unos), [[acc],[m, 3, p], [np]]) --> [a, unos].
-d0(d0(a, unas), [[acc],[f, 3, p], [np]]) --> [a, unas].
-d0(d0(al), [[acc],[m, 3, s], [np]])      --> [al].
-d0(d0(a, la), [[acc],[f, 3, s], [np]])   --> [a, la].
-d0(d0(a, los), [[acc],[m, 3, p], [np]])  --> [a, los].
-d0(d0(a, las), [[acc],[f, 3, p], [np]])  --> [a, las].
+d0(d0(a, un), [[acc],[m, 3, s],[comm], [np]])   --> [a, un].
+d0(d0(a, una), [[acc],[f, 3, s],[comm], [np]])  --> [a, una].
+d0(d0(a, unos), [[acc],[m, 3, p],[comm], [np]]) --> [a, unos].
+d0(d0(a, unas), [[acc],[f, 3, p],[comm], [np]]) --> [a, unas].
+d0(d0(al), [[acc],[m, 3, s],[comm], [np]])      --> [al].
+d0(d0(a, la), [[acc],[f, 3, s],[comm], [np]])   --> [a, la].
+d0(d0(a, los), [[acc],[m, 3, p],[comm], [np]])  --> [a, los].
+d0(d0(a, las), [[acc],[f, 3, p],[comm], [np]])  --> [a, las].
 
 %%! articles in genitive
-d0(d0(de, un), [[gen],[m, 3, s], [np]])   --> [de, un].
-d0(d0(de, una), [[gen],[f, 3, s], [np]])  --> [de, una].
-d0(d0(de, unos), [[gen],[m, 3, p], [np]]) --> [de, unos].
-d0(d0(de, unas), [[gen],[f, 3, p], [np]]) --> [de, unas].
-d0(d0(del), [[gen],[m, 3, s], [np]])      --> [del].
-d0(d0(de, la), [[gen],[f, 3, s], [np]])   --> [de, la].
-d0(d0(de, los), [[gen],[m, 3, p], [np]])  --> [de, los].
-d0(d0(de, las), [[gen],[f, 3, p], [np]])  --> [de, las].
+d0(d0(de, un), [[gen],[m, 3, s],[comm], [np]])   --> [de, un].
+d0(d0(de, una), [[gen],[f, 3, s],[comm], [np]])  --> [de, una].
+d0(d0(de, unos), [[gen],[m, 3, p],[comm], [np]]) --> [de, unos].
+d0(d0(de, unas), [[gen],[f, 3, p],[comm], [np]]) --> [de, unas].
+d0(d0(del), [[gen],[m, 3, s],[comm], [np]])      --> [del].
+d0(d0(de, la), [[gen],[f, 3, s],[comm], [np]])   --> [de, la].
+d0(d0(de, los), [[gen],[m, 3, p],[comm], [np]])  --> [de, los].
+d0(d0(de, las), [[gen],[f, 3, p],[comm], [np]])  --> [de, las].
 
 %% Null article for proper nouns.
-d0(d0(), [[nom, obl],[_, 3, s], [np]])   --> [].
-d0(d0(a), [[acc],[_, 3, s], [np]])       --> [a].
-d0(d0(de), [[gen],[_, 3, s], [np]])       --> [de].
+d0(d0(), [[nom, obl],[_, 3, s],[proper] ,[np]])   --> [].
+d0(d0(a), [[acc],[_, 3, s],[proper], [np]])       --> [a].
+d0(d0(de), [[gen],[_, 3, s],[proper], [np]])       --> [de].
 
 %%! Pronouns
 
 %%! Clitics
-d0(d0(lo), [[acc], [m,3,s], [v0]])  --> [lo].
-d0(d0(la), [[acc], [f,3,s], [v0]])  --> [la].
-d0(d0(los), [[acc], [m,3,p], [v0]])  --> [los].
-d0(d0(las), [[acc], [f,3,p], [v0]])  --> [las].
-
-d0(d0(pro), [[nom], [_,_,_], []])      --> [].
-d0(d0(él), [[_], [m,3,s], []])      --> [él].
-d0(d0(ella), [[_], [f,3,s], []])      --> [ella].
-d0(d0(ellas), [[_], [f,3,p], []])      --> [ellas].
+d0(d0(lo), [[acc], [m,3,s],[_], [v0]])  --> [lo].
+d0(d0(la), [[acc], [f,3,s],[_], [v0]])  --> [la].
+d0(d0(los), [[acc], [m,3,p],[_], [v0]])  --> [los].
+d0(d0(las), [[acc], [f,3,p],[_], [v0]])  --> [las].
+%%! personal pronouns
+d0(d0(pro), [[nom], [_,_,_],[], []])      --> [].
+d0(d0(él), [[_], [m,3,s],[proper], []])      --> [él].
+d0(d0(ella), [[_], [f,3,s],[proper], []])      --> [ella].
+d0(d0(ellas), [[_], [f,3,p],[proper], []])      --> [ellas].
 
 
 %%! Nouns
 %% n0(n0(noun), [[case], [gender, person, number],[?proper] ,[subcategorization]])
-n0(n0(linguista),[_,[_,3,s], [], [dp]])      --> [linguista].
-n0(n0(linguistas),[_,[_,3,p], [], [dp]])     --> [linguistas].
-n0(n0(observatorio),[_,[m,3,s], [], [dp]])   --> [observatorio].
-n0(n0(biblioteca),[_,[f,3,s], [], [dp]])     --> [biblioteca].
-n0(n0(universidad),[_,[f,3,s], [], [dp]])     --> [universidad].
-n0(n0(telescopio),[_,[m,3,s], [], [dp]])     --> [telescopio].
-n0(n0(investigador),[_,[m,3,s], [], [dp]])   --> [investigador].
-n0(n0(investigadora),[_,[f,3,s], [], [dp]])  --> [investigadora].
-n0(n0(investigadores),[_,[m,3,p], [], [dp]]) --> [investigadores].
-n0(n0(investigadoras),[_,[f,3,p], [], [dp]]) --> [investigadoras].
-n0(n0(ingenieras),[_,[f,3,p], [], [dp]])     --> [ingenieras].
+n0(n0(linguista),[_,[_,3,s], [comm], [dp]])      --> [linguista].
+n0(n0(linguistas),[_,[_,3,p], [comm], [dp]])     --> [linguistas].
+n0(n0(observatorio),[_,[m,3,s], [comm], [dp]])   --> [observatorio].
+n0(n0(biblioteca),[_,[f,3,s], [comm], [dp]])     --> [biblioteca].
+n0(n0(universidad),[_,[f,3,s], [comm], [dp]])     --> [universidad].
+n0(n0(telescopio),[_,[m,3,s], [comm], [dp]])     --> [telescopio].
+n0(n0(investigador),[_,[m,3,s], [comm], [dp]])   --> [investigador].
+n0(n0(investigadora),[_,[f,3,s], [comm], [dp]])  --> [investigadora].
+n0(n0(investigadores),[_,[m,3,p], [comm], [dp]]) --> [investigadores].
+n0(n0(investigadoras),[_,[f,3,p], [comm], [dp]]) --> [investigadoras].
+n0(n0(ingenieras),[_,[f,3,p], [comm], [dp]])     --> [ingenieras].
 
 %%! Proper nouns
 n0(n0(angelica),[_,[f,3,s], [proper], [dp]])  --> [angelica].
@@ -160,13 +160,13 @@ ap(ap(Int, A), [_, Phi]) --> int0(Int,_), abar(A, [_,Phi]).
 %%! Nouns
 % nbar(nbar(N), [Case,Phi, F]) 
 % np(np(N), [Case,Phi, F])
-nbar(nbar(N), [Case,Phi, F])     --> n0(N, [Case,Phi, F, [dp]]).
-nbar(nbar(N, D), [Case,Phi, F])     --> n0(N, [Case,Phi, F, [dp]]), dp(D, [[gen], _]).
+nbar(nbar(N), [Case,Phi, Prop])     --> n0(N, [Case,Phi, Prop, [dp]]).
+nbar(nbar(N, D), [Case,Phi, Prop])     --> n0(N, [Case,Phi, Prop, [dp]]), dp(D, [[gen], _]).
 
-np(np(N), [Case,Phi, F])    --> nbar(N, [Case, Phi, F]). 
-np(np(N, A), [Case,Phi, F]) --> np(N, [Case, Phi, F]), ap(A, [Case,Phi]).
-np(np(A, N), [Case,Phi, F]) --> ap(A, [Case, Phi]), np(N, [Case,Phi, F]).
-np(np(N, P), [Case,Phi, F]) --> np(N, [Case, Phi, F]), pp(P,_).
+np(np(N), [Case,Phi, Prop])    --> nbar(N, [Case, Phi, Prop]). 
+np(np(N, A), [Case,Phi, Prop]) --> np(N, [Case, Phi, Prop]), ap(A, [Case,Phi]).
+np(np(A, N), [Case,Phi, Prop]) --> ap(A, [Case, Phi]), np(N, [Case,Phi, Prop]).
+np(np(N, P), [Case,Phi, Prop]) --> np(N, [Case, Phi, Prop]), pp(P,_).
 
 
 %%! Prepositions 
@@ -199,10 +199,12 @@ vp(vp(V, Adv), [T,Phi]) --> vp(V, [T,Phi]), advp(Adv,_).
 %%! Determiners
 %% dbar(dbar(D), [Case, Phi])
 %% dp(dp(D), [Case, Phi])
-% pronouns
-dbar(dbar(D), [Case, Phi])     --> d0(D, [Case, Phi, []]).
+% pro
+dbar(dbar(D), [Case, Phi])     --> d0(D, [Case, Phi,[],[]]).
+%%!  personal pronouns
+dbar(dbar(D), [Case, Phi])     --> d0(D, [Case, Phi,[proper],[]]).
 %%! determiner + np(articles)
-dbar(dbar(D, N),[Case2, Phi]) --> d0(D, [Case2, Phi, [np]]), np(N, [Case, Phi,_]), { subset(Case2, Case) }.
+dbar(dbar(D, N),[Case2, Phi]) --> d0(D, [Case2, Phi, Prop,[np]]), np(N, [Case, Phi, Prop]), { subset(Case2, Case) }.
 dp(dp(D), [Case, Phi]) --> dbar(D, [Case, Phi]).
 
 
@@ -222,4 +224,3 @@ ip(ip(Adv, I), [_, _]) --> advp(Adv, _), ip(I,_).
 % cp(cp(C), Features)
 cbar(cbar(C, I),_) --> c0(C,_), ip(I, _).
 cp(cp(C),_) --> cbar(C,_).
-
