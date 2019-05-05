@@ -181,7 +181,7 @@ pp(pp(P),_) --> pbar(P,_).
 % unaccusative verbs
 vbar(vbar(V),[T,Phi])    --> v0(V,[T,Phi,[], []]).
 %%! clitic + verb
-vbar(vbar(D, V),[T,Phi]) --> d0(D, [Case,_, [v0]]), v0(V,[T,Phi, Case, [dp]]).
+vbar(vbar(D, V),[T,Phi]) --> d0(D, [Case,_,[_], [v0]]), v0(V,[T,Phi, Case, [dp]]).
 %%! verb + dp complement
 vbar(vbar(V, D),[T,Phi]) --> v0(V,[T,Phi, Case1, [dp]]), dp(D, [Case,_]), { subset(Case1, Case), dif(Case, [nom])}.
 %%! verb + cp complement
