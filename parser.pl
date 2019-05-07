@@ -51,8 +51,8 @@
 %%  phrase(cp(Tree, F), [irene, vio, angelica]). false
 %%  phrase(cp(Tree, F), [irene, vio, el, telescopio]).
 %%  phrase(cp(Tree, F), [irene, vio, al, telescopio]). false
-%   phrase(cp(Tree, F), [los, linguistas, vieron, los, telescopios]).
-%%  phrase(cp(Tree, F), [noam, saludo, a, barbara]).
+%%  phrase(cp(Tree, F), [irene, vio, al, linguista]).
+%%  phrase(cp(Tree, F), [los, linguistas, vieron, los, telescopios]).
 %%  phrase(cp(Tree, F), [irene, dijo, que, lo, vio]).
 %%  phrase(cp(Tree, F), [alan, pregunto, si, angelica, llego, ayer]).
 %%  phrase(cp(Tree, F), [los, linguistas, estaban, borrachos]).
