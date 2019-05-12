@@ -37,7 +37,7 @@
 
 :- use_rendering(svgtree, [list(false)]).
 :- use_module(library(tabling)).
-:- table np/4, vp/4. 
+:- table np/4, vp/4, dp/4, advp/4, ap/4, pp/4.
 
 
 
@@ -149,22 +149,38 @@ d0(d0(de), [[gen],[_, 3, s],[proper,_], [np]])      --> [de].
 %%! Pronouns
 
 %%! Clitics
+d0(d0(me), [[acc], [_,1,s],[_,_], [v0]])  --> [me].
+d0(d0(te), [[acc], [_,2,s],[_,_], [v0]])  --> [te].
 d0(d0(lo), [[acc], [m,3,s],[_,_], [v0]])  --> [lo].
 d0(d0(la), [[acc], [f,3,s],[_,_], [v0]])  --> [la].
+d0(d0(nos), [[acc], [_,1,p],[_,_], [v0]])  --> [nos].
+d0(d0(los), [[acc], [m,2,p],[_,_], [v0]])  --> [los].
+d0(d0(las), [[acc], [f,2,p],[_,_], [v0]])  --> [las].
 d0(d0(los), [[acc], [m,3,p],[_,_], [v0]]) --> [los].
 d0(d0(las), [[acc], [f,3,p],[_,_], [v0]]) --> [las].
 
 %%! personal pronouns
-d0(d0(pro), [[nom], [_,_,_],[_,_], []])          --> [].
-d0(d0(él), [[_], [m,3,s],[proper, hum], []])     --> [él].
-d0(d0(ella), [[_], [f,3,s],[proper, hum], []])   --> [ella].
-d0(d0(ellas), [[_], [f,3,p],[proper, hum], []])  --> [ellas].
+d0(d0(pro), [[nom], [_,_,_],[_,_], []])                   --> [].
+d0(d0(yo), [[nom], [_,1,s],[proper, hum], []])            --> [yo].
+d0(d0(mí), [[obl], [_,1,s],[proper, hum], []])            --> [mí].
+d0(d0(tú), [[nom], [_,2,s],[proper, hum], []])            --> [tú].
+d0(d0(ti), [[obl], [_,2,s],[proper, hum], []])            --> [ti].
+d0(d0(él), [[nom, obl], [m,3,s],[proper, hum], []])        --> [él].
+d0(d0(ella), [[nom, obl], [f,3,s],[proper, hum], []])     --> [ella].
+d0(d0(nosotros), [[nom, obl], [m,1,p],[proper, hum], []]) --> [nosotros].
+d0(d0(nosotras), [[nom, obl], [f,1,p],[proper, hum], []]) --> [nosotras].
+d0(d0(ustedes), [[nom, obl], [_,2,p],[proper, hum], []])  --> [ustedes].
+d0(d0(ellas), [[nom, obl], [f,3,p],[proper, hum], []])    --> [ellas].
+d0(d0(ellos), [[nom, obl], [m,3,p],[proper, hum], []])    --> [ellos].
 
 
 
 %%! ADVERBS AND INTENSIFIERS
 %% x0(x0(x), [Features])
 adv0(adv0(ayer), [])  --> [ayer].
+adv0(adv0(hoy), [])  --> [hoy].
+adv0(adv0(aquí), [])  --> [aquí].
+adv0(adv0(allá), [])  --> [allá].
 int0(int0(muy),  [])  --> [muy].
 %%! PREPOSITIONS
 %% p0(p0(preposition), [case])
@@ -230,18 +246,29 @@ abar(abar(A), [_, Phi])  --> a0(A, [_, Phi]).
 
 ap(ap(A), [_, Phi])      --> abar(A, [_,Phi]).
 ap(ap(Int, A), [_, Phi]) --> int0(Int,_), abar(A, [_,Phi]).
+ap(ap(A, Con), [_, Phi]) --> ap(A, [_,Phi]), conp(Con, [_, Phi, [ap]]).
+
 
 
 
 %%! DETERMINERS
 %% dbar(dbar(D), [Case, Phi])
 %% dp(dp(D), [Case, Phi])
-% pro d0(d0(pro), [[nom], [_,_,_],[_,_], []])          --> [].
-dbar(dbar(D), [Case, Phi])     --> d0(D, [Case, Phi,[_,_],[]]).
+dbar(dbar(pro), [Case, Phi])     --> d0(pro, [Case, Phi,[_,_],[]]).
 %%!  personal pronouns
 dbar(dbar(D), [Case, Phi])     --> d0(D, [Case, Phi,[proper, hum],[]]).
 %%! determiner + np (articles)
 dbar(dbar(D, N),[Case2, Phi])  --> d0(D, [Case2, Phi, Class,[np]]), np(N, [Case, Phi, Class]), { subset(Case2, Case) }.
+
+dp(dp(D, Con), [Case,[Gen, Per, p]]) --> dp(D, [Case, [Gen1, Per1,_]]), conp(Con, [_, [Gen2, Per2,_], [dp]]),
+    {
+      ((Gen1 == f , Gen2 == f) -> Gen = f ; Gen = m) , %%! if both are feminine then Gen is f, m otherwise
+      (
+        ((Per1 == 1 ; Per2 == 1) -> Per = 1) ; %%! if Per1 or Per2 are 1st person, then Per is 1st person
+        (((Per1 == 2 ; Per2 == 2), (Per1 \== 1 ; Per2 \== 1))  ->  Per = 2) ; %%! if (Per1 or Per2) are 2nd person and none of them are 1st person, then Per is 2nd person
+        ((Per1 == 3 , Per2 == 3) -> Per = 3) %%! if both, Per1 and Per2 are 3rd person, then Per is 3rd person
+      )
+    }.
 
 dp(dp(D), [Case, Phi]) --> dbar(D, [Case, Phi]).
 
@@ -252,6 +279,7 @@ dp(dp(D), [Case, Phi]) --> dbar(D, [Case, Phi]).
 %  advp(advp(Adv), [features])
 advbar(advbar(Adv), F) --> adv0(Adv, F).
 advp(advp(Adv), F)     --> advbar(Adv, F).
+advp(advp(Adv, Con), F)     --> advp(Adv, F), conp(Con, [_, [advp]]).
 
 
 
@@ -260,7 +288,8 @@ advp(advp(Adv), F)     --> advbar(Adv, F).
 % pp(pp(P), [Case])
 pbar(pbar(P, D),_) --> p0(P,Case1), dp(D,[Case,_]), { subset(Case1, Case) }.
 
-pp(pp(P),_) --> pbar(P,_).
+pp(pp(P), F) --> pbar(P, F).
+pp(pp(P, Con), F) --> pp(P, F), conp(Con, [F, [pp]]).
 
 
 
@@ -301,3 +330,14 @@ ip(ip(Adv, I), [_, _])       --> advp(Adv, _), ip(I,_).
 cbar(cbar(C, I),_) --> c0(C,_), ip(I, _).
 
 cp(cp(C),_) --> cbar(C,_).
+
+%%! COORDINATE CONJUNCTIONS
+con0(con(y), [[conjunctiveCoord],[_]]) --> [y].
+con0(con(o), [[disjunctiveCoord],[_]]) --> [o].
+
+conbar(conbar(Con, D), [Case, Phi, [dp]]) --> con0(Con,_), dp(D, [Case, Phi]).
+conbar(conbar(Con, A), [Case, Phi, [ap]]) --> con0(Con,_), ap(A, [Case, Phi]).
+conbar(conbar(Con, Adv), [F, [advp]]) --> con0(Con,_), advp(Adv, F).
+conbar(conbar(Con, P), [F, [pp]]) --> con0(Con,_), pp(P, F).
+
+conp(conp(Con), F) --> conbar(Con, F).
